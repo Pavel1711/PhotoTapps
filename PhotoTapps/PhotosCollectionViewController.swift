@@ -9,8 +9,12 @@ import UIKit
 
 class PhotosCollectionViewController: UICollectionViewController {
 
+    let itemsPerRows: CGFloat = 2
+    let sectionInserts = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        collectionView.showsVerticalScrollIndicator = false
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -33,22 +37,21 @@ class PhotosCollectionViewController: UICollectionViewController {
 
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRows: CGFloat = 2
-        let paddingWidth = 20 * (itemsPerRows + 1)
+        let paddingWidth = sectionInserts.left * (itemsPerRows + 1)
         let availableWidth = collectionView.frame.width - paddingWidth
         let widthPerItem = availableWidth / itemsPerRows
         return CGSize (width: widthPerItem, height: widthPerItem)
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
+        return sectionInserts
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return sectionInserts.left
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 20
+        return sectionInserts.left
     }
 }
